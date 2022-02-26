@@ -4,6 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+# Variables for fields of the form
 fullname = ""
 lastname = ""
 ident = ""
@@ -14,6 +15,7 @@ position = ""
 drugs = ""
 disorder = ""
 disease = ""
+
 # ruta index - Index route
 @app.route('/')
 def Index():
@@ -27,14 +29,13 @@ month = now.month
 day = now.day
 
 #Excel para Registros
-
 wb_registro = load_workbook('respuestas/registro/registro.xlsx')
 sheet_registro = wb_registro['Registros']
 beginrow_registro = 2
 finalrow_registro = 1000
 listB_registro = [sheet_registro['A' + str(i)].value for i in range(beginrow_registro , finalrow_registro + 1)]
 
-# Formulario de inicio - Form
+# Formulario - Form
 @app.route('/datos', methods=['POST'])
 def datos():
     if request.method == 'POST':
@@ -88,8 +89,6 @@ def datos():
                 wb_registro.save('respuestas/registro/registro.xlsx')
                 file_from = 'respuestas/registro/registro.xlsx'
                 file_to = '/registro1/registro.xlsx'
-
-               
 
                 return render_template('consentimiento.html', fullname = fullname, lastname = lastname, ident = ident, year = year, month = month, day = day)
 

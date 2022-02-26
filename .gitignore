@@ -1,10 +1,7 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 /env
 /__pycache__
 =======
-=======
->>>>>>> f7bc602c7e407e045593a9cf9a96b64fa099168f
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -134,7 +131,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-<<<<<<< HEAD
 >>>>>>> f7bc602c7e407e045593a9cf9a96b64fa099168f
-=======
->>>>>>> f7bc602c7e407e045593a9cf9a96b64fa099168f
+
+# excel files from folder answers
+*.xlsx
+!registro.xlsx
