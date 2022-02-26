@@ -93,7 +93,7 @@ h4 {
   justify-content: center;
   align-items: center;
   display: flex;
-  height: 800px;
+  height: 600px;
   width: 100%;
   font-family: 'Lobster', cursive;
   font-size: 50px;
@@ -201,10 +201,10 @@ sup {
 
 a {
   color: #0d6efd;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
-  color: #0a58ca;
+  color: #ffffff;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {

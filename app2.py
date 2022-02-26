@@ -183,7 +183,7 @@ def exam():
 
 
 # ---------------------------- # ---------------------------
-#Abrir archivo "excel" para ingreso de datos - Open "excel" file for data entry
+#Abrir archivo excel para ingreso de datos - Open excel file for data entry
 wb = load_workbook('sacarpuntajes.xlsm')
 listB2 = ""
 sheet = wb['Respuestas']
@@ -195,7 +195,6 @@ finalrow = 189
 # ----------------------Variables globales / Global Variables-------------------
 fullname_2 = ""
 ident_2 = ""
-
 
 @app.route('/form_2')
 def form_2():

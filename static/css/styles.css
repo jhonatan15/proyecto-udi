@@ -248,3 +248,45 @@
   background-color:none;
   padding-top: 0;
 }
+
+#exam_2 {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: 'Lobster', cursive;
+}
+
+#thanks_2 {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  height: 400px;
+  width: 100%;
+  font-family: 'Lobster', cursive;
+  font-size: 50px;
+}
+
+#thanks {
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  display: flex;
+  height: 600px;
+  padding-bottom: 50px;
+  padding-top: 150px;
+}
+
+#begin_exam_2 {
+  font-size: 30px;
+}
+
+#a_decor {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+#a_decor:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
