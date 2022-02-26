@@ -16,32 +16,32 @@ drugs = ""
 disorder = ""
 disease = ""
 
-# ruta index - Index route
+# Index route
 @app.route('/')
 def Index():
     return render_template('index.html', fullname = fullname, lastname = lastname, ident = ident, birth = birth, status = status, company = company, position = position, drugs = drugs, disorder = disorder)
 
 
-# Variables globales - Global variables
+# Global variables
 now = datetime.now()
 year = now.year
 month = now.month
 day = now.day
 
-#Excel para Registros
+# Excel for records
 wb_registro = load_workbook('respuestas/registro/registro.xlsx')
 sheet_registro = wb_registro['Registros']
 beginrow_registro = 2
 finalrow_registro = 1000
 listB_registro = [sheet_registro['A' + str(i)].value for i in range(beginrow_registro , finalrow_registro + 1)]
 
-# Formulario - Form
+# Form
 @app.route('/datos', methods=['POST'])
 def datos():
     if request.method == 'POST':
         global fullname, lastname, ident, birth, status, company, position, drugs, disorder, disease
 
-# Capturar informacion del formulario - Capture form information
+# Capture form information
         fullname = request.form['fullname']
         lastname = request.form['lastname']
         ident = request.form['ident']
@@ -54,12 +54,12 @@ def datos():
         disorder = request.form['disorder']
         disease = request.form['disease']
 
-# confirmar si las variables estan llenas para continuar a la segunda pagina - confirm if the variables are full to continue to the second page
+# Confirm if the variables are full to continue to the second page
         if button == 'continuar':
             if fullname != "" and lastname != "" and ident != "" and birth != "" and status != "" and company != "" and position != "" and drugs != "" and disorder != "" and disease != "":
                 number = 1
 
-                #Listas de cada fila / list of rows
+                # list of rows
                 row_name = sheet_registro['B']
                 for i in row_name:
                     if i.value is not None:
@@ -92,7 +92,7 @@ def datos():
 
                 return render_template('consentimiento.html', fullname = fullname, lastname = lastname, ident = ident, year = year, month = month, day = day)
 
-# Terminos y condiciones - Terms and conditions
+# Terms and conditions
 @app.route('/consentimiento', methods=['POST'])
 def consentimiento():
     if request.method == 'POST':
@@ -101,7 +101,7 @@ def consentimiento():
         if button == 'accept':
             return render_template('exam.html')
 
-#Guardar datos de la primer prueba en excel
+# Save answers of the first examn in excel
 wb_first = load_workbook('primerexamen.xlsm')
 listB2_first = ""
 sheet_first = wb_first['Respuestas']
@@ -113,10 +113,10 @@ finalrow_first = 23
 def exam():
     if request.method == 'POST':
 
-#Variables globales - Global variables
+# Global variables
         global wb_first, sheet_first, listB2_first, fullname, lastname
 
-#Obtener valores de un range de celdas en excel - Get values ​​from a range of cells in excel
+# Get values ​​from a range of cells in excel
         listb_first = [sheet_first['B' + str(i)].value for i in range(beginrow_first , finalrow_first + 1)]
         sheet_first['F9'] = fullname
         sheet_first['G9'] = ident
@@ -138,7 +138,7 @@ def exam():
         button = request.form["button"]
         button2 = int(button)
 
-#Function to for cycle
+# Function to for cycle
         def fill_excel():
             for i in listb_first:
                     ist = str(i)
@@ -146,21 +146,17 @@ def exam():
                         sheet2 = "C" + number
                         sheet_first[sheet2] = letter
 
-#Ciclo for para separar numeros y letras de la primera lista y despues escribir en su respectiva celda de excel - For cycle to separate numbers and letters from the first list and then write in their respective excel cell
+# For cycle to separate numbers and letters from the first list and then write in their respective excel cell
         if button2 == 21:
             list_quest = [question1, question2, question3, question4, question5, question6, question7]
             list_quest2 = [question8, question9, question10]
             for i in list_quest:
                 number = i[0]
                 letter = i[2]
-                print(number)
-                print(letter)
                 fill_excel()
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
-                print(number)
-                print(letter)
                 fill_excel()
 
         if button2 == 22:
@@ -169,8 +165,6 @@ def exam():
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
-                print(number)
-                print(letter)
                 fill_excel()
 
         wb_first.save('respuestas/encuesta1/1_'+ str(ident) +'.xlsx')
@@ -183,7 +177,7 @@ def exam():
 
 
 # ---------------------------- # ---------------------------
-#Abrir archivo excel para ingreso de datos - Open excel file for data entry
+# Open excel file for data entry
 wb = load_workbook('sacarpuntajes.xlsm')
 listB2 = ""
 sheet = wb['Respuestas']
@@ -192,7 +186,7 @@ multiple_cells = sheet['B3':'B189']
 beginrow = 3
 finalrow = 189
 
-# ----------------------Variables globales / Global Variables-------------------
+# ----------------- Global Variables -------------------
 fullname_2 = ""
 ident_2 = ""
 
@@ -206,17 +200,17 @@ def datos_2():
         global fullname_2
         global ident_2
 
-# Capturar informacion del formulario - Capture form information
+# Capture form information
         fullname_2 = request.form['fullname_2']
         ident_2 = request.form['ident_2']
         button_2 = request.form['button']
 
-# confirmar si las variables estan llenas para continuar a la segunda pagina - confirm if the variables are full to continue to the second page
+# confirm if the variables are full to continue to the second page
         if button_2 == 'continuar2':
             if fullname_2 != "" and ident_2 != "":
                 return render_template('instrucciones.html')
 
- # Instrucciones y ejemplos - Instructions and examples
+ # Instructions and examples
 @app.route('/instrucciones', methods=['POST'])
 def exam_1():
     if request.method == 'POST':
@@ -224,19 +218,19 @@ def exam_1():
         if button == 'accept':
             return render_template('exam_1.html')
 
-# Comienzo del examen - Start exam
+# Start exam
 
 @app.route('/exam_1', methods=['POST'])
 def exam_2():
     if request.method == 'POST':
 
-#Variables globales - Global variables
+# Global variables
         global wb, sheet, listB, wb2, fullname_2, ident_2
 
         sheet_id['B6'] = fullname_2
         sheet_id['C6'] = ident_2
 
-#Obtener valores de un range de celdas en excel - Get values ​​from a range of cells in excel
+# Get values ​​from a range of cells in excel
         listb = [sheet['B' + str(i)].value for i in range(beginrow , finalrow + 1)]
         try:
             question1 = request.form["question1"]
@@ -255,29 +249,25 @@ def exam_2():
         button = request.form["button"]
         button2 = int(button)
 
-#Function to for cycle
+# Function to for cycle
         def fill_excel_2():
             for i in listb:
                     ist = str(i)
                     if ist == number:
                         sheet2 = "C" + number
                         sheet[sheet2] = letter              
-#Ciclo for para separar numeros y letras de la primera lista y despues escribir en su respectiva celda de excel - For cycle to separate numbers and letters from the first list and then write in their respective excel cell
+# For cycle to separate numbers and letters from the first list and then write in their respective excel cell
         if button2 == 2:
             list_quest = [question1, question2, question3, question4, question5, question6, question7]
             list_quest2 = [question8, question9, question10]
             for i in list_quest:
                 number = i[0]
                 letter = i[2]
-                print(number)
-                print(letter)
                 fill_excel_2()
 
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
-                print(number)
-                print(letter)
                 fill_excel_2()
 
 
@@ -286,8 +276,6 @@ def exam_2():
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
-                print(number)
-                print(letter)
                 fill_excel_2()
 
 
@@ -297,15 +285,11 @@ def exam_2():
             for i in list_quest:
                 number = i[0:2]
                 letter = i[3]
-                print(number)
-                print(letter)
                 fill_excel_2()
 
             for i in list_quest2:
                 number = i[0:3]
                 letter = i[4]
-                print(number)
-                print(letter)
                 fill_excel_2()
 
 
@@ -315,8 +299,6 @@ def exam_2():
                 for i in list_quest:
                     number = i[0:3]
                     letter = i[4]
-                    print(number)
-                    print(letter)
                     fill_excel_2()
 
             else:
@@ -324,20 +306,18 @@ def exam_2():
                 for i in list_quest2:
                     number = i[0:3]
                     letter = i[4]
-                    print(number)
-                    print(letter)
                     fill_excel_2()
 
 
 
 
 
-#Guardar archivo de excel con el id de la persona que relleno el formulario - Save excel file with the id of the person who filled out the form
+# Save excel file with the id of the person who filled out the form
         wb.save('respuestas/encuesta2/0_'+ str(ident_2) +'.xlsx')
         file_from_3 = ('respuestas/encuesta2/0_'+ str(ident_2) +'.xlsx')
         file_to_3 = ('/respuestas2/0_'+ str(ident_2) +'.xlsx')
         
-#Cambiar de pagina html al presionar boton continuar en cada pagina
+# Change html pages when press button continue
         list_pages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         for i in list_pages:
             if i == button2:
