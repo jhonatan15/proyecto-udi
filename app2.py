@@ -117,7 +117,7 @@ def exam():
         global wb_first, sheet_first, listB2_first, fullname, lastname
 
 #Obtener valores de un range de celdas en excel - Get values ​​from a range of cells in excel
-        listB_first = [sheet_first['B' + str(i)].value for i in range(beginrow_first , finalrow_first + 1)]
+        listb_first = [sheet_first['B' + str(i)].value for i in range(beginrow_first , finalrow_first + 1)]
         sheet_first['F9'] = fullname
         sheet_first['G9'] = ident
         print(ident)
@@ -138,6 +138,14 @@ def exam():
         button = request.form["button"]
         button2 = int(button)
 
+#Function to for cycle
+        def fill_excel():
+            for i in listb_first:
+                    ist = str(i)
+                    if ist == number:
+                        sheet2 = "C" + number
+                        sheet_first[sheet2] = letter
+
 #Ciclo for para separar numeros y letras de la primera lista y despues escribir en su respectiva celda de excel - For cycle to separate numbers and letters from the first list and then write in their respective excel cell
         if button2 == 21:
             list_quest = [question1, question2, question3, question4, question5, question6, question7]
@@ -147,35 +155,23 @@ def exam():
                 letter = i[2]
                 print(number)
                 print(letter)
-                for i in listB_first:
-                    ist = str(i)
-                    if ist == number:
-                        sheet2 = "C" + number
-                        sheet_first[sheet2] = letter
+                fill_excel()
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
                 print(number)
                 print(letter)
-                for i in listB_first:
-                    ist2 = str(i)
-                    if ist2 == number:
-                        sheet2 = "C" + number
-                        sheet_first[sheet2] = letter
+                fill_excel()
 
         if button2 == 22:
-            print(listB_first)
+            print(listb_first)
             list_quest2 = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11]
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
                 print(number)
                 print(letter)
-                for i in listB_first:
-                    ist2 = str(i)
-                    if ist2 == number:
-                        sheet2 = "C" + number
-                        sheet_first[sheet2] = letter
+                fill_excel()
 
         wb_first.save('respuestas/encuesta1/1_'+ str(ident) +'.xlsx')
         file_from_2 = ('respuestas/encuesta1/1_'+ str(ident) +'.xlsx')
@@ -242,7 +238,7 @@ def exam_2():
         sheet_id['C6'] = ident_2
 
 #Obtener valores de un range de celdas en excel - Get values ​​from a range of cells in excel
-        listB = [sheet['B' + str(i)].value for i in range(beginrow , finalrow + 1)]
+        listb = [sheet['B' + str(i)].value for i in range(beginrow , finalrow + 1)]
         try:
             question1 = request.form["question1"]
             question2 = request.form["question2"]
@@ -260,6 +256,13 @@ def exam_2():
         button = request.form["button"]
         button2 = int(button)
 
+#Function to for cycle
+        def fill_excel_2():
+            for i in listb:
+                    ist = str(i)
+                    if ist == number:
+                        sheet2 = "C" + number
+                        sheet[sheet2] = letter              
 #Ciclo for para separar numeros y letras de la primera lista y despues escribir en su respectiva celda de excel - For cycle to separate numbers and letters from the first list and then write in their respective excel cell
         if button2 == 2:
             list_quest = [question1, question2, question3, question4, question5, question6, question7]
@@ -269,22 +272,14 @@ def exam_2():
                 letter = i[2]
                 print(number)
                 print(letter)
-                for i in listB:
-                    ist = str(i)
-                    if ist == number:
-                        sheet2 = "C" + number
-                        sheet[sheet2] = letter
+                fill_excel_2()
 
             for i in list_quest2:
                 number = i[0:2]
                 letter = i[3]
                 print(number)
                 print(letter)
-                for i in listB:
-                    ist2 = str(i)
-                    if ist2 == number:
-                        sheet2 = "C" + number
-                        sheet[sheet2] = letter
+                fill_excel_2()
 
 
         if button2 > 2 and button2  < 11:
@@ -294,11 +289,7 @@ def exam_2():
                 letter = i[3]
                 print(number)
                 print(letter)
-                for i in listB:
-                    ist2 = str(i)
-                    if ist2 == number:
-                        sheet2 = "C" + number
-                        sheet[sheet2] = letter
+                fill_excel_2()
 
 
         if button2 == 11:
@@ -309,22 +300,14 @@ def exam_2():
                 letter = i[3]
                 print(number)
                 print(letter)
-                for i in listB:
-                    ist = str(i)
-                    if ist == number:
-                        sheet2 = "C" + number
-                        sheet[sheet2] = letter
+                fill_excel_2()
 
             for i in list_quest2:
                 number = i[0:3]
                 letter = i[4]
                 print(number)
                 print(letter)
-                for i in listB:
-                    ist2 = str(i)
-                    if ist2 == number:
-                        sheet2 = "C" + number
-                        sheet[sheet2] = letter
+                fill_excel_2()
 
 
         if button2 > 11:
@@ -335,11 +318,7 @@ def exam_2():
                     letter = i[4]
                     print(number)
                     print(letter)
-                    for i in listB:
-                        ist2 = str(i)
-                        if ist2 == number:
-                            sheet2 = "C" + number
-                            sheet[sheet2] = letter
+                    fill_excel_2()
 
             else:
                 list_quest2 = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
@@ -348,11 +327,7 @@ def exam_2():
                     letter = i[4]
                     print(number)
                     print(letter)
-                    for i in listB:
-                        ist2 = str(i)
-                        if ist2 == number:
-                            sheet2 = "C" + number
-                            sheet[sheet2] = letter
+                    fill_excel_2()
 
 
 
