@@ -6,9 +6,6 @@ This is a university project to provide a scientific contribution that allows kn
 
 _This instructions will allow you obtain a copy of the project for development and testing purposes._
 
-Look at **Deployment** for known how deployment the project.
-
-
 ### Pre-requirements 📋
 
 _What do you need?_
